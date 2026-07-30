@@ -18,7 +18,20 @@
 
 package io.ballerina.lib.smb.server;
 
+import io.ballerina.runtime.api.types.ObjectType;
 import io.ballerina.runtime.api.values.BObject;
 
-public record SmbService(BObject service, String path) {
+import java.util.Map;
+
+/**
+ * Represents an SMB service registered with a listener, along with the handler
+ * metadata resolved once at registration (attach) time.
+ *
+ * + service - the attached Ballerina service object
+ * + path - the normalized directory path this service listens to
+ * + serviceType - the resolved object type of the service
+ * + handlers - resolved metadata for each recognized handler remote function, keyed by method name
+ */
+public record SmbService(BObject service, String path, ObjectType serviceType,
+                          Map<String, HandlerMethodInfo> handlers) {
 }
